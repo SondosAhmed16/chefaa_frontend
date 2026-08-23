@@ -1,0 +1,14 @@
+{
+  "login": "تسجيل الدخول",
+  "emailOrPhone": "أدخل البريد الإلكتروني أو رقم الهاتف",
+  "password": "أدخل كلمة المرور",
+  "forgotPassword": "نسيت كلمة المرور؟",
+  "wrongPassword": "كلمة المرور غير صحيحة!",
+  "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+  "signInGoogle": "تسجيل الدخول باستخدام Google",
+  "signInApple": "تسجيل الدخول باستخدام Apple",
+  "dontHaveAccount": "ليس لديك حساب؟",
+  "signUp": "إنشاء حساب",
+  "welcomeBack": "مرحبًا بعودتك!",
+  "loginSuccess": "تم تسجيل الدخول بنجاح إلى تطبيق شفاء"
+}

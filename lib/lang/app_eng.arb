@@ -1,0 +1,14 @@
+{
+  "login": "Login",
+  "emailOrPhone": "Enter your email or phone",
+  "password": "Enter your password",
+  "forgotPassword": "Forgot Password?",
+  "wrongPassword": "Wrong password!",
+  "invalidCredentials": "Invalid email or password",
+  "signInGoogle": "Sign in with Google",
+  "signInApple": "Sign in with Apple",
+  "dontHaveAccount": "Don't have an account?",
+  "signUp": "Sign Up",
+  "welcomeBack": "Yeay! Welcome Back",
+  "loginSuccess": "Once again you login successfully into Chefaa app"
+}
