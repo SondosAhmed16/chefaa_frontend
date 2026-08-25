@@ -1,5 +1,5 @@
 import 'package:chefaa_frontend/models/user_role.dart';
-import 'package:chefaa_frontend/providers/register_providers.dart';
+import 'package:chefaa_frontend/providers/register_patient_providers.dart';
 import 'package:chefaa_frontend/views/facility_selection_screen.dart';
 import 'package:chefaa_frontend/views/register_doctor_screen.dart';
 import 'package:chefaa_frontend/views/register_patient_screen.dart';
@@ -18,7 +18,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
   bool _isFacilitySelected = false;
   @override
   Widget build(BuildContext context) {
-    final regiserProvider = context.watch<RegisterProviders>();
+    final regiserProvider = context.watch<RegisterPatientProviders>();
     final selectedRole = regiserProvider.selectedRole;
 
     final bool isSelected = selectedRole != null || _isFacilitySelected;

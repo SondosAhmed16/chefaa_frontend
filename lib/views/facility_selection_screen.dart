@@ -1,5 +1,5 @@
 import 'package:chefaa_frontend/models/user_role.dart';
-import 'package:chefaa_frontend/providers/register_providers.dart';
+import 'package:chefaa_frontend/providers/register_patient_providers.dart';
 import 'package:chefaa_frontend/views/register_doctor_screen.dart';
 import 'package:chefaa_frontend/views/widgets/role_card.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,7 @@ class FacilitySelectionScreen extends StatelessWidget {
 
  @override
   Widget build(BuildContext context) {
-    final provider = context.watch<RegisterProviders>();
+    final provider = context.watch<RegisterPatientProviders>();
     final selectedRole = provider.selectedRole;
     final isSelected = selectedRole == UserRole.pharmacy || selectedRole == UserRole.lab;
 

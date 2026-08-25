@@ -5,7 +5,7 @@ import 'package:chefaa_frontend/services/api_services.dart';
 import 'package:chefaa_frontend/services/storage_servicse.dart';
 import 'package:flutter/material.dart';
 
-class RegisterProviders extends ChangeNotifier {
+class RegisterPatientProviders extends ChangeNotifier {
   UserRole? _selectedRole;
 
   final TextEditingController firstNameController = TextEditingController();
@@ -51,7 +51,7 @@ class RegisterProviders extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> register() async {
+  Future<void> registerPatient() async {
     final firstName = firstNameController.text.trim();
     final lastName = lastNameController.text.trim();
     final phone = phoneController.text.trim();
@@ -90,7 +90,7 @@ class RegisterProviders extends ChangeNotifier {
       final userName =
           "${firstName.toLowerCase()}_${DateTime.now().millisecondsSinceEpoch.toString().substring(8)}";
 
-      final response = await ApiServices.register(
+      final response = await ApiServices.registerPatient(
         name: fullName,
         userName: userName,
         email: email,

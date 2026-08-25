@@ -1,5 +1,6 @@
 import 'package:chefaa_frontend/providers/auth_provider.dart';
-import 'package:chefaa_frontend/providers/register_providers.dart';
+import 'package:chefaa_frontend/providers/register_doctor_provider.dart';
+import 'package:chefaa_frontend/providers/register_patient_providers.dart';
 import 'package:chefaa_frontend/providers/settings_providers.dart';
 import 'package:chefaa_frontend/views/role_selection_screen.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,9 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => SettingsProviders()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
-                ChangeNotifierProvider(create: (_) => RegisterProviders()),
+       ChangeNotifierProvider(create: (_) => RegisterPatientProviders()),
+       ChangeNotifierProvider(create: (_) => RegisterDoctorProvider()),
+
 
       ],
       child: const chefaaApp(),

@@ -3,11 +3,13 @@ import 'dart:convert';
 import 'package:chefaa_frontend/services/api_services.dart';
 import 'package:chefaa_frontend/services/storage_servicse.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 enum AuthErrorState { none, wrongPassword, invalidCredentials }
 
 class AuthProvider extends ChangeNotifier {
+  bool _isPendingVerification = false;
+  bool get isPendingVerification => _isPendingVerification;
+
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -34,6 +36,11 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void resetPendingStatus() {
+    _isPendingVerification = false;
+    notifyListeners();
+  }
+
   Future<void> login() async {
     final identity = emailController.text.trim();
     final password = passwordController.text.trim();
@@ -46,6 +53,7 @@ class AuthProvider extends ChangeNotifier {
 
     _isLoading = true;
     _errorMessage = null;
+    _isPendingVerification = false;
     notifyListeners();
 
     try {
@@ -59,7 +67,16 @@ class AuthProvider extends ChangeNotifier {
         _errorMessage = "Server error. Please try again later.";
         return;
       }
+
       final Map<String, dynamic> data = jsonDecode(response.body);
+
+      // فحص إذا كان الحساب بانتظار التفعيل
+      if (response.statusCode == 403 || data['message'] == 'Account pending verification') {
+        _isPendingVerification = true;
+        _errorMessage = null;
+        return;
+      }
+
       if (response.statusCode == 200) {
         await StorageServicse.saveTokens(
           accessToken: data['accessToken'],
@@ -82,14 +99,12 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-
-Future<void>logout()async{
-  await ApiServices.logout();
-  _isSuccess=false;
-  _userData=null;
-  notifyListeners();
-}
-
+  Future<void> logout() async {
+    await ApiServices.logout();
+    _isSuccess = false;
+    _userData = null;
+    notifyListeners();
+  }
 
   void resetSuccess() {
     _isSuccess = false;

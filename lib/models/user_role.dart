@@ -8,7 +8,7 @@ extension UserRoleExtension on UserRole {
       case UserRole.patient:
         return 'patient';
       case UserRole.facility:
-        return 'facility'; // يُستخدم فقط للتميز في الواجهة (UI Only)
+        return 'facility'; 
       case UserRole.pharmacy:
         return 'pharmacy';
       case UserRole.lab:

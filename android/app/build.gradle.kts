@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.example.chefaa_frontend"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -43,3 +43,5 @@ kotlin {
 flutter {
     source = "../.."
 }
+
+

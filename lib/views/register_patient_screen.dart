@@ -1,4 +1,4 @@
-import 'package:chefaa_frontend/providers/register_providers.dart';
+import 'package:chefaa_frontend/providers/register_patient_providers.dart';
 import 'package:chefaa_frontend/views/login_screen.dart';
 import 'package:chefaa_frontend/views/widgets/custom_text_field.dart';
 import 'package:chefaa_frontend/views/widgets/success_dialog.dart';
@@ -10,7 +10,7 @@ class RegisterPatientScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = context.watch<RegisterProviders>();
+    final provider = context.watch<RegisterPatientProviders>();
     final isError = provider.errorMessage != null;
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -187,7 +187,7 @@ class RegisterPatientScreen extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: provider.isLoading
                             ? null
-                            : () => provider.register(),
+                            : () => provider.registerPatient(),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: isError
                               ? Colors.grey

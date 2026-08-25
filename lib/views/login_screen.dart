@@ -1,4 +1,5 @@
 import 'package:chefaa_frontend/views/register_patient_screen.dart';
+import 'package:chefaa_frontend/views/widgets/verification_pending_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
@@ -14,7 +15,6 @@ class LoginScreen extends StatelessWidget {
     final settings = context.watch<SettingsProviders>();
     final auth = context.watch<AuthProvider>();
 
-    // عرض الحوار (Dialog) في حالة النجاح
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (auth.isSuccess) {
         showDialog(
@@ -23,7 +23,18 @@ class LoginScreen extends StatelessWidget {
             title: "Yeay! Welcome Back",
             message: "Once again you login successfully into Chefaa app",
           ),
-        ).then((_) => context.read<AuthProvider>().resetSuccess());
+        ).then((_) => context.read<AuthProvider>().resetSuccess()); 
+      } else if (auth.isPendingVerification) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (_) => VerificationPendingDialog(
+            onOk: () {
+              Navigator.pop(context);
+              context.read<AuthProvider>().resetPendingStatus();
+            },
+          ),
+        );
       }
     });
 

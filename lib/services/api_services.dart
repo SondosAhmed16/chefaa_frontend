@@ -6,7 +6,8 @@ import 'package:http/http.dart' as http;
 class ApiServices {
   static const String baseURL = 'https://shefaa-backend.vercel.app/api/auth';
 
-  static Future<http.Response?> register({
+  // Register for patients
+  static Future<http.Response?> registerPatient({
     required String name,
     required String userName,
     required String email,
@@ -27,6 +28,34 @@ class ApiServices {
         'role': role,
       }),
     );
+  }
+
+  //Register fo Doctors
+  static Future<http.StreamedResponse?> registerDoctor({
+    required String name,
+    required String username,
+    required String email,
+    required String password,
+    required String phoneNumber,
+    required String specialization,
+    required String filePath,
+  }) async {
+    final url = Uri.parse("$baseURL/register");
+    var request = http.MultipartRequest("POST", url);
+
+    request.fields['name'] = name;
+    request.fields['username'] = username;
+    request.fields['email'] = email;
+    request.fields['password'] = password;
+    request.fields['phoneNumber'] = phoneNumber;
+    request.fields['role'] = 'doctor';
+    request.fields['specialization'] = specialization;
+
+    request.files.add(
+      await http.MultipartFile.fromPath('membership', filePath),
+    );
+
+    return await request.send();
   }
 
   static Future<http.Response?> login({
