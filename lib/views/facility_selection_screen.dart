@@ -1,6 +1,7 @@
 import 'package:chefaa_frontend/models/user_role.dart';
 import 'package:chefaa_frontend/providers/register_patient_providers.dart';
 import 'package:chefaa_frontend/views/register_doctor_screen.dart';
+import 'package:chefaa_frontend/views/register_pharmacy_screen.dart';
 import 'package:chefaa_frontend/views/widgets/role_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -75,7 +76,7 @@ class FacilitySelectionScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => const RegisterDoctorScreen(),
+                              builder: (_) => const RegisterPharmacyScreen(),
                             ),
                           );
                         }

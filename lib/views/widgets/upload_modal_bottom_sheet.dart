@@ -7,11 +7,14 @@ class UploadModalBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return Container(
       padding: const EdgeInsets.all(24),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
+      decoration: BoxDecoration(
+        color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -19,13 +22,17 @@ class UploadModalBottomSheet extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 "Upload your Membership Card",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: theme.textTheme.bodyLarge?.color,
+                ),
               ),
               IconButton(
                 onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.close),
+                icon: Icon(Icons.close, color: theme.iconTheme.color),
               ),
             ],
           ),
@@ -36,36 +43,41 @@ class UploadModalBottomSheet extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: 30),
               decoration: BoxDecoration(
-                color: Colors.blue.shade50.withOpacity(0.5),
+                color: isDark
+                    ? theme.primaryColor.withOpacity(0.15)
+                    : Colors.blue.shade50.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(15),
                 border: Border.all(
-                  color: const Color(0xFF0066CC),
+                  color: theme.primaryColor,
                   style: BorderStyle.solid,
                 ),
               ),
               child: Column(
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.cloud_upload_outlined,
                     size: 40,
-                    color: Color(0xFF0066CC),
+                    color: theme.primaryColor,
                   ),
                   const SizedBox(height: 10),
-                  const Text(
+                  Text(
                     "Choose a file",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: theme.textTheme.bodyMedium?.color,
+                    ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     "JPEG, PNG, PDF formats up to 50MB",
-                    style: TextStyle(color: Colors.grey.shade600, fontSize: 11),
+                    style: TextStyle(color: theme.hintColor, fontSize: 11),
                   ),
                   const SizedBox(height: 14),
                   ElevatedButton(
                     onPressed: onBrowse,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      foregroundColor: Colors.black,
+                      backgroundColor: isDark ? Colors.grey.shade800 : Colors.white,
+                      foregroundColor: isDark ? Colors.white : Colors.black,
                       elevation: 1,
                     ),
                     child: const Text(

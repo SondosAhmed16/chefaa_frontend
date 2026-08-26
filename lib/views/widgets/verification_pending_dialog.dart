@@ -15,48 +15,48 @@ class VerificationPendingDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      backgroundColor: Colors.white,
+      backgroundColor: isDark ? const Color(0xFF1E1E1E) : Colors.white,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 28),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Icon Background Container
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Colors.amber.shade50,
+                color: Colors.amber.shade50.withOpacity(isDark ? 0.2 : 1),
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.hourglass_top_rounded,
                 size: 48,
-                color: Colors.amber.shade800,
+                color: isDark ? Colors.amber.shade300 : Colors.amber.shade800,
               ),
             ),
             const SizedBox(height: 20),
 
-            // Title
             Text(
               title!,
               textAlign: TextAlign.center,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Colors.black87,
+                color: theme.textTheme.titleLarge?.color ?? (isDark ? Colors.white : Colors.black87),
               ),
             ),
             const SizedBox(height: 10),
 
-            // Message Content
             Text(
               message!,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 13,
-                color: Colors.grey.shade600,
+                color: theme.hintColor,
                 height: 1.4,
               ),
             ),
@@ -68,15 +68,15 @@ class VerificationPendingDialog extends StatelessWidget {
               child: OutlinedButton(
                 onPressed: onOk,
                 style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: Color(0xFF0066CC), width: 1.5),
+                  side: BorderSide(color: theme.primaryColor, width: 1.5),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25),
                   ),
                 ),
-                child: const Text(
+                child: Text(
                   "OK",
                   style: TextStyle(
-                    color: Color(0xFF0066CC),
+                    color: theme.primaryColor,
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
                   ),

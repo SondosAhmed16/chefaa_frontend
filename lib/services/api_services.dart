@@ -58,6 +58,37 @@ class ApiServices {
     return await request.send();
   }
 
+  static Future<http.StreamedResponse?> registerPharmacy({
+    required String name,
+    required String username,
+    required String email,
+    required String password,
+    required String phoneNumber,
+    required String commercialRegisterNumber,
+    required String filePath,
+  }) async {
+    final url = Uri.parse("$baseURL/register");
+    var request = http.MultipartRequest('POST', url);
+
+    request.fields['name'] = name;
+    request.fields['username'] = username;
+    request.fields['email'] = email;
+    request.fields['password'] = password;
+    request.fields['phoneNumber'] = phoneNumber;
+    request.fields['role'] = 'pharmacy';
+    request.fields['commercialRegisterNumber'] = commercialRegisterNumber;
+
+    request.files.add(
+      await http.MultipartFile.fromPath('medicalLicence', filePath),
+    );
+
+    try {
+      return await request.send();
+    } catch (e) {
+      return null;
+    }
+  }
+
   static Future<http.Response?> login({
     required String identity,
     required String password,
